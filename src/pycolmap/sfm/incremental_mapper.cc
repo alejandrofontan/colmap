@@ -1,6 +1,6 @@
-#include "colmap/controllers/incremental_mapper.h"
-
 #include "colmap/sfm/incremental_mapper.h"
+
+#include "colmap/controllers/incremental_pipeline.h"
 
 #include "pycolmap/helpers.h"
 #include "pycolmap/pybind11_extension.h"
@@ -340,7 +340,7 @@ void BindIncrementalMapperImpl(py::module& m) {
   // TODO: migrate comments. improve formatting
   py::class_<IncrementalMapper, std::shared_ptr<IncrementalMapper>>(
       m, "IncrementalMapper")
-      .def(py::init<std::shared_ptr<const DatabaseCache>>())
+      .def(py::init<std::shared_ptr<const DatabaseCache>>(), "database_cache"_a)
       .def("begin_reconstruction",
            &IncrementalMapper::BeginReconstruction,
            "reconstruction"_a)
